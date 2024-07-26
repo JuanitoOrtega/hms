@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- Menú principal -->
+    <menuitem id="menu_hospital_root"
+        name="HMS"
+        sequence="35"
+    />
+    <menuitem id="menu_frontdesk"
+        name="Front Desk"
+        parent="menu_hospital_root"
+    />
+
+    <!-- Pacientes -->
+    <menuitem id="menu_patients"
+        name="Pacientes"
+        parent="menu_frontdesk"
+        action="action_hospital_patient"
+    />
+    <menuitem id="menu_patients_readonly"
+        name="Ver pacientes"
+        parent="menu_frontdesk"
+        action="action_hospital_readonly_patient"
+    />
+
+    <!-- Citas -->
+    <menuitem id="menu_appointments_root"
+        name="Citas"
+        parent="menu_hospital_root"
+    />
+    <menuitem id="menu_appointments"
+        name="Citas"
+        parent="menu_appointments_root"
+        action="action_hospital_appointment"
+    />
+</odoo>

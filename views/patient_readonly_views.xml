@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="view_hospital_patient_readonly_tree" model="ir.ui.view">
+        <field name="name">hospital.patient.readonly.tree</field>
+        <field name="model">hospital.patient</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <tree string="Pacientes" create="0" delete="0" edit="0">
+                <field name="partner_id"/>
+                <field name="phone" optional="show"/>
+                <field name="date_of_birth" optional="show"/>
+                <field name="age" optional="show"/>
+                <field name="gender" optional="hide"/>
+                <field name="blood_group" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hospital_patient_readonly_form" model="ir.ui.view">
+        <field name="name">hospital.patient.readonly.form</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <form string="Pacientes" create="0" delete="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id"/>
+                            <field name="gender"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="date_of_birth"/>
+                            <field name="age"/>
+                            <field name="blood_group"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="base.group_user"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hospital_readonly_patient" model="ir.actions.act_window">
+        <field name="name">Ver pacientes</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_ids" eval="[Command.clear(),
+            (0,0,{'view_mode':'tree','view_id': ref('view_hospital_patient_readonly_tree')}),
+            (0,0,{'view_mode':'form','view_id': ref('view_hospital_patient_readonly_form')})]"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_smiling_face">
+                Crear nuevo paciente
+            </p>
+            <p>
+                No hay pacientes para mostrar.
+            </p>
+        </field>
+    </record>
+</odoo>
